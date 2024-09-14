@@ -1,0 +1,14 @@
+In this puzzle, you will solve cube-like puzzles in the fewest moves, but instead of the usual cubes, the puzzles come in a variety of geometric shapes.
+A permutation puzzle comprises a solution state, an initial state, and a set of allowed moves.
+The solution state and initial state are arrangements of symbols we call colors, while the moves for a puzzle correspond to certain permutations of these arrangements.
+A sequence of moves solves a puzzle if applying each permutation in the sequence to the puzzle's initial_state results in the puzzle's solution_state, and we call such a sequence a solution to the puzzle.
+You may rearrange some of the stickers on a puzzle instead of applying moves, and so a puzzle may also be allotted wildcards. In this case, the resulting state may differ up to the puzzle's num_wildcards and the sequence will still be considered a solution.
+The overall score for a submission is the total number of moves in all of its puzzle solutions. The goal of the competition is to solve all of the given puzzles in the fewest moves.
+For each id, the submission file should contain a sequence of moves delimited by a period .. Each move must either be one of the puzzle's allowed_moves (as given in puzzle_info.csv, or else one of their inverses, which you may denote by a prefixed -, as in -a.
+The moves will be applied to the puzzle's initial_state from left to right. Each sequence must solve its corresponding puzzle in order for the submission to be valid.
+Your submission csv file should follow this format: a header with the puzzle id written as "id" and the moves to solve the puzzle written as "moves", each new line should include the puzzle id number followed by the set of moves to solve the puzzle. 
+Save all python scripts written and your submission file in one directory
+Optimize your code as much as possible.
+You must write the algorithms to solve the puzzles.
+Here is an explanation of the data in puzzle_info.csv: puzzle_type Identifies the type of puzzle. Puzzles of the same type have a common set of moves and allowed_moves Describes the moves allowed in solutions of this puzzle type. Each move represents a permutation given in array form. You are also allowed to use the inverses of these moves in your puzzle solutions.
+Here is an explanation of the data in puzzles.csv: id is a unique identifier for each puzzle, puzzle_type corresponds to that in puzzle_info.csv, solution_state is An arrangement of "colors" describing the solved state of the puzzle, with a semicolon ; delimiter, initial_state is An arrangement of colors describing the initial state of the puzzle, with a semicolon ; delimiter. A solution to a puzzle must transform the initial state to the solved state through a sequential application of the puzzle's allowed_moves, num_wildcards is the number of "mistakes" allowed in the final state of a solution.
