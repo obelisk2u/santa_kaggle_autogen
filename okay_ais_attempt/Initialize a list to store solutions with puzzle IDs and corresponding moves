@@ -1,0 +1,24 @@
+# Initialize a list to store solutions with puzzle IDs and corresponding moves
+solutions_data = []
+
+# Iterate through the puzzles in the puzzles_df DataFrame
+for index, puzzle in puzzles_df.iterrows():
+    puzzle_id = puzzle['id']
+    puzzle_type = puzzle['puzzle_type']
+    initial_state = puzzle['initial_state']
+    solution_state = puzzle['solution_state']
+
+    # Get the allowed moves for the puzzle type from puzzle_info_df
+    allowed_moves = puzzle_info_df[puzzle_info_df['puzzle_type'] == puzzle_type]['allowed_moves'].iloc[0]
+
+    # Calculate the fewest number of moves needed to solve the puzzle
+    fewest_moves = calculate_fewest_moves(initial_state, solution_state, allowed_moves)
+
+    # Store the puzzle ID and the corresponding moves in solutions_data
+    solutions_data.append({"id": puzzle_id, "moves": fewest_moves})
+
+# Create a DataFrame from the solutions data
+solutions_df = pd.DataFrame(solutions_data)
+
+# Export the solutions to a CSV file with the required format
+solutions_df.to_csv("puzzle_solutions.csv", index=False)

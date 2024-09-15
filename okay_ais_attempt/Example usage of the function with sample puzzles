@@ -1,0 +1,9 @@
+# Example usage of the function with sample puzzles
+initial_state_example = "A;B;C"
+solution_state_example = "C;B;A"
+allowed_moves_example = ["A", "B"]
+
+# Calculate the fewest number of moves needed to solve the puzzle
+fewest_moves_example = calculate_fewest_moves(initial_state_example, solution_state_example, allowed_moves_example)
+
+fewest_moves_example  # Output the result

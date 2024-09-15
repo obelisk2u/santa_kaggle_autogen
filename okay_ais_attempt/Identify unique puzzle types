@@ -1,0 +1,12 @@
+# Identify unique puzzle types
+unique_puzzle_types = puzzle_info_df['puzzle_type'].unique()
+
+# Create a dictionary to map puzzle types to allowed moves
+puzzle_type_moves = {}
+
+# Iterate over unique puzzle types to populate the dictionary with allowed moves
+for p_type in unique_puzzle_types:
+    moves_list = puzzle_info_df.loc[puzzle_info_df['puzzle_type'] == p_type, 'allowed_moves'].iloc[0]
+    puzzle_type_moves[p_type] = moves_list
+
+puzzle_type_moves

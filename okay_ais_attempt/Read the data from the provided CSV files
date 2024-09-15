@@ -1,0 +1,62 @@
+# Read the data from the provided CSV files
+import pandas as pd
+from collections import deque
+
+# Load the puzzles.csv file
+puzzles_df = pd.read_csv("puzzles.csv")
+puzzle_info_df = pd.read_csv("puzzle_info.csv")
+
+# Define the function to calculate the fewest number of moves using BFS
+def calculate_fewest_moves(initial_state, solution_state, allowed_moves):
+    queue = deque([(initial_state, 0)])  # Initialize queue with initial state and zero moves
+    visited = set()  # Set to keep track of visited states
+    
+    while queue:
+        current_state, moves = queue.popleft()  # Get the current state and number of moves
+        
+        if current_state == solution_state:
+            return moves  # Return the number of moves when the solution state is reached
+        
+        if current_state in visited:
+            continue  # Skip if the current state has been visited
+        
+        visited.add(current_state)
+        
+        # Generate next states by applying allowed moves
+        for move in allowed_moves:
+            next_state = apply_move(current_state, move)  # Apply the move to get the next state
+            
+            queue.append((next_state, moves + 1))  # Add the next state to the queue with updated number of moves
+        
+    return -1  # Return -1 if no solution is found within the constraints
+
+# Define the function to apply a move to the current state and get the next state
+def apply_move(current_state, move):
+    # Placeholder for applying the move logic
+    # Replace this with the actual logic to apply the move correctly
+    return current_state  # Placeholder - Actual logic needed here
+
+# Initialize a list to store solutions with puzzle IDs and corresponding moves
+solutions_data = []
+
+# Iterate through the puzzles in the puzzles_df DataFrame
+for index, puzzle in puzzles_df.iterrows():
+    puzzle_id = puzzle['id']
+    puzzle_type = puzzle['puzzle_type']
+    initial_state = puzzle['initial_state']
+    solution_state = puzzle['solution_state']
+
+    # Get the allowed moves for the puzzle type from puzzle_info_df
+    allowed_moves = puzzle_info_df[puzzle_info_df['puzzle_type'] == puzzle_type]['allowed_moves'].iloc[0]
+
+    # Calculate the fewest number of moves needed to solve the puzzle
+    fewest_moves = calculate_fewest_moves(initial_state, solution_state, allowed_moves)
+
+    # Store the puzzle ID and the corresponding moves in solutions_data
+    solutions_data.append({"id": puzzle_id, "moves": fewest_moves})
+
+# Create a DataFrame from the solutions data
+solutions_df = pd.DataFrame(solutions_data)
+
+# Export the solutions to a CSV file with the required format
+solutions_df.to_csv("puzzle_solutions.csv", index=False)

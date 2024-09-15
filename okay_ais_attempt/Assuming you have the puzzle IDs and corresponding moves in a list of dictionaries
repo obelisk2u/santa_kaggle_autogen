@@ -1,0 +1,12 @@
+# Assuming you have the puzzle IDs and corresponding moves in a list of dictionaries
+solutions = [
+    {"id": 1, "moves": "A-B-C"},
+    {"id": 2, "moves": "B-A-B"}
+    # Add more puzzle IDs and moves as needed
+]
+
+# Create a DataFrame from the solutions
+solutions_df = pd.DataFrame(solutions)
+
+# Save the solutions to a CSV file with the required format
+solutions_df.to_csv("puzzle_solutions.csv", index=False)
